@@ -1,9 +1,30 @@
 /* game board table */
 
+body{
+  background-color: black;
+}
+
+#board {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+h1 {
+  text-align: center;
+  font-size: 50px;
+  
+  background: -webkit-linear-gradient(#9700cc, #f6019d, #2de2e6, #035ee8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+}
+
 #board td {
   width: 50px;
   height: 50px;
   border: solid 1px #666;
+  position: relative;
 }
 
 /* pieces are div within game table cells: draw as colored circles */
@@ -14,17 +35,34 @@
   width: 80%;
   height: 80%;
   border-radius: 50%;
+
+  margin-top: auto;
+  position: absolute;
+  animation-duration: 1s;
+  animation-name: dropping-game-piece;
+  transform: translate(0%, -50%);
+
+}
+@keyframes dropping-game-piece {
+  from {
+    /* height of td * (number of rows on the board) gives us margin top */
+    margin-top: -300px;
+  }
+
+  to {
+    margin-top: 0px;
+  }
 }
 
 
 
 /* TODO: make pieces red/blue,  depending on player 1/2 piece */
 .piece.p1 {
-  background-color: red;
+  background-color: #9700cc;
 }
 
 .piece.p2 {
-      background-color: blue;
+      background-color: #f6019d;
     }
 
 
@@ -36,5 +74,5 @@
 }
 
 #column-top td:hover {
-  background-color: gold;
+  background-color: #2de2e6;
 }
