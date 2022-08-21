@@ -20,15 +20,14 @@ body{
   z-index: 1;
   background-color: black;
   padding-top: 50px;
-  padding-bottom: 40px;
+  padding-bottom: 5px;
 
   
 }
 
 h1 {
   text-align: center;
-  font-size: 50px;
-  
+  font-size: 60px;
   background: -webkit-linear-gradient(#9700cc, #f6019d, #2de2e6, #035ee8);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
