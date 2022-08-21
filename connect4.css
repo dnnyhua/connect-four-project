@@ -2,6 +2,7 @@
 
 body{
   background-color: black;
+  margin:0
 }
 
 #board {
@@ -9,6 +10,20 @@ body{
   margin-right: auto;
 }
 
+#board{
+  bottom: 10px;
+}
+
+
+#titleContainer {
+  position: relative;
+  z-index: 1;
+  background-color: black;
+  padding-top: 50px;
+  padding-bottom: 40px;
+
+  
+}
 
 h1 {
   text-align: center;
@@ -17,7 +32,6 @@ h1 {
   background: -webkit-linear-gradient(#9700cc, #f6019d, #2de2e6, #035ee8);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-
 }
 
 #board td {
@@ -41,6 +55,7 @@ h1 {
   animation-duration: 1s;
   animation-name: dropping-game-piece;
   transform: translate(0%, -50%);
+  z-index: -1;
 
 }
 @keyframes dropping-game-piece {
@@ -56,24 +71,19 @@ h1 {
 
 
 
-/* TODO: make pieces red/blue,  depending on player 1/2 piece */
+/* TODO: make pieces purple/pink,  depending on player 1/2 piece */
 .piece.p1 {
   background-color: #9700cc;
 }
 
 .piece.p2 {
-      background-color: #f6019d;
-    }
+  background-color: #f6019d;
+}
 
 
 /* column-top is table row of clickable areas for each column */
 
-
-#column-top td {
-  border: dashed 1px lightgray;
-  border-radius: 50%;
-}
-
 #column-top td:hover {
   background-color: #2de2e6;
+ 
 }

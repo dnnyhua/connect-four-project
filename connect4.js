@@ -18,6 +18,7 @@ var board = []; // array of rows, each row is array of cells  (board[y][x])
 function makeBoard() {
   // TODO: set "board" to empty HEIGHT x WIDTH matrix array
 
+  // Array constructor will create empty arrays based on specified length
   board = Array(HEIGHT).fill().map(() => Array(WIDTH).fill());
   
 
@@ -29,7 +30,6 @@ function makeBoard() {
 }
 
 /** makeHtmlBoard: make HTML table and row of column tops. */
-
 function makeHtmlBoard() {
   // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
    const htmlBoard = document.getElementById('board');
@@ -79,13 +79,11 @@ function findSpotForCol(x) {
     }
   }
   return null;
-
   */
 }
 
 
 /** placeInTable: update DOM to place piece into HTML table of board */
-
 function placeInTable(y, x) {
   // TODO: make a div and insert into correct table cell
   const piece = document.createElement("div");
@@ -94,9 +92,7 @@ function placeInTable(y, x) {
   currPlayer === 1 ? piece.classList.add("p1") : piece.classList.add("p2");
 
   /* ** Springboard's answer **
-    
   piece.classList.add(`p${currPlayer}`); 
-
   */
 
   /** append game piece to td (cell) that was created up top */
@@ -104,14 +100,12 @@ function placeInTable(y, x) {
 }
 
 /** endGame: announce game end */
-
 function endGame(msg) {
   // TODO: pop up alert message
   alert(msg)
 }
 
 /** handleClick: handle click of column top to play piece */    
-
 function handleClick(evt) {
   // get x from ID of clicked cell
   let x = evt.target.id;
@@ -130,15 +124,14 @@ function handleClick(evt) {
   // check for win
   if (checkForWin()) {
     const top = document.querySelector("#column-top");
-    top.removeEventListener("click", handleClick);
+    top.removeEventListener("click", handleClick); // remove event listener, this only runs if checkForWin() is true
     return endGame(`Player ${currPlayer} won!`);
   }
 
   // check for tie
   // TODO: check if all cells in board are filled; if so call, call endGame
-
   if (board.every((row) => row.every((col) => col !== undefined))) {
-    endGame("Tie!");
+    return endGame("Tie!");
   }
 
   /***  Springboard's answer ***
@@ -156,6 +149,8 @@ function handleClick(evt) {
   const top = document.querySelector('#column-top');
   p1_color = "#9700cc";
   p2_color = "#f6019d";
+
+  // changing top row's color, to indicate whose turn it is 
   if(currPlayer===2){
     top.style.backgroundColor = p2_color;
   }
@@ -189,15 +184,15 @@ function checkForWin() {
     );
   }
 
-  // TODO: read and understand this code. Add comments to help you.
-
+  // Below defines what 4 cells we want to check, which will then be passed into _win function to see if the 4 cells match all requirements
   for (let y = 0; y < HEIGHT; y++) {
     for (let x = 0; x < WIDTH; x++) {
-      let horiz = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]]; // [0,0], [0,1], [0,2], [0,3)] 
-      let vert = [[y, x], [y + 1, x], [y + 2, x], [y + 3, x]];
+      let horiz = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]]; // [0,0], [0,1], [0,2], [0,3)], then x will increment [0,1], [0,2], [0,3], [0,4)]
+      let vert = [[y, x], [y + 1, x], [y + 2, x], [y + 3, x]]; 
       let diagDR = [[y, x], [y + 1, x + 1], [y + 2, x + 2], [y + 3, x + 3]];
       let diagDL = [[y, x], [y + 1, x - 1], [y + 2, x - 2], [y + 3, x - 3]];
 
+      // return true if any of the 4 _win function returns true
       if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL)) {
         return true;
       }
