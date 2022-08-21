@@ -43,6 +43,7 @@ function makeHtmlBoard() {
     let headCell = document.createElement("td");
     headCell.setAttribute("id", x);
     top.append(headCell);
+    top.style.backgroundColor = "#9700cc";
   }
   htmlBoard.append(top);
 
@@ -128,6 +129,8 @@ function handleClick(evt) {
 
   // check for win
   if (checkForWin()) {
+    const top = document.querySelector("#column-top");
+    top.removeEventListener("click", handleClick);
     return endGame(`Player ${currPlayer} won!`);
   }
 
@@ -150,6 +153,16 @@ function handleClick(evt) {
   // switch players
   // TODO: switch currPlayer 1 <-> 2
   currPlayer === 1 ? (currPlayer = 2) : (currPlayer = 1);
+  const top = document.querySelector('#column-top');
+  p1_color = "#9700cc";
+  p2_color = "#f6019d";
+  if(currPlayer===2){
+    top.style.backgroundColor = p2_color;
+  }
+  else{
+    top.style.backgroundColor = p1_color;
+  }
+
 
   /*** Springboard's answer ***
   
