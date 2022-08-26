@@ -2,7 +2,7 @@
 
 body{
   background-color: black;
-  margin:0
+  margin:0px;
 }
 
 #board {
@@ -16,6 +16,7 @@ body{
 
 
 #titleContainer {
+  margin: 0px;
   position: relative;
   z-index: 1;
   background-color: black;
@@ -53,7 +54,11 @@ h1 {
   position: absolute;
   animation-duration: 1s;
   animation-name: dropping-game-piece;
+
+  /* Need to adjust game pieces up or it will sit below the cells*/
   transform: translate(0%, -50%);
+  
+  /* Make the game piece to appear to fall behind the top row instead of in front*/
   z-index: -1;
 
 }
@@ -81,7 +86,6 @@ h1 {
 
 
 /* column-top is table row of clickable areas for each column */
-
 #column-top td:hover {
   background-color: #2de2e6;
  

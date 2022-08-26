@@ -5,7 +5,7 @@
  * board fills (tie)
  */
 
-var WIDTH = 7;
+var WIDTH = 7; // don't use var, update all to cosnt or let
 var HEIGHT = 6;
 
 var currPlayer = 1; // active player: 1 or 2
@@ -17,7 +17,6 @@ var board = []; // array of rows, each row is array of cells  (board[y][x])
 
 function makeBoard() {
   // TODO: set "board" to empty HEIGHT x WIDTH matrix array
-
   // Array constructor will create empty arrays based on specified length
   board = Array(HEIGHT).fill().map(() => Array(WIDTH).fill());
   
@@ -34,6 +33,7 @@ function makeHtmlBoard() {
   // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
    const htmlBoard = document.getElementById('board');
 
+
   // TODO: Clickable top row of the board where game piece will be dropped
   let top = document.createElement("tr");
   top.setAttribute("id", "column-top");
@@ -46,6 +46,7 @@ function makeHtmlBoard() {
     top.style.backgroundColor = "#9700cc";
   }
   htmlBoard.append(top);
+
 
   // Main board below top row. 
   // Create cells where game pieces will go. Each cell will have an id and the cell will append to a row, which will then be appended to htmlBoard
@@ -60,6 +61,7 @@ function makeHtmlBoard() {
     htmlBoard.append(row);
   }
 }
+
 
 /** findSpotForCol: given column x, return top empty y (null if filled) */
 function findSpotForCol(x) {
@@ -108,7 +110,7 @@ function endGame(msg) {
 /** handleClick: handle click of column top to play piece */    
 function handleClick(evt) {
   // get x from ID of clicked cell
-  let x = evt.target.id;
+  let x = +evt.target.id; // + is changing id to numerical integer, because it is a string
 
   // get next spot in column (if none, ignore click)
   let y = findSpotForCol(x);
@@ -124,7 +126,8 @@ function handleClick(evt) {
   // check for win
   if (checkForWin()) {
     const top = document.querySelector("#column-top");
-    top.removeEventListener("click", handleClick); // remove event listener, this only runs if checkForWin() is true
+    // remove event listener, this only runs if checkForWin() is true, so that you can no longer add pieces
+    top.removeEventListener("click", handleClick);
     return endGame(`Player ${currPlayer} won!`);
   }
 
@@ -140,23 +143,29 @@ function handleClick(evt) {
     return endGame("It's a tie!");
   }
 
-***/
+  ***/
 
 
   // switch players
   // TODO: switch currPlayer 1 <-> 2
-  currPlayer === 1 ? (currPlayer = 2) : (currPlayer = 1);
-  const top = document.querySelector('#column-top');
+  const top = document.querySelector("#column-top");
   p1_color = "#9700cc";
   p2_color = "#f6019d";
 
+  currPlayer === 1 ? (currPlayer = 2) && (top.style.backgroundColor = p2_color ) : (currPlayer = 1) && (top.style.backgroundColor = p1_color);                   
+  
+  
+
+  // below section was condensed above
+
   // changing top row's color, to indicate whose turn it is 
-  if(currPlayer===2){
-    top.style.backgroundColor = p2_color;
-  }
-  else{
-    top.style.backgroundColor = p1_color;
-  }
+  // if(currPlayer===1){
+  //   top.style.backgroundColor = p1_color;
+  // }
+  // else{
+  //   currPlayer === 2;
+  //   top.style.backgroundColor = p2_color;
+  // }
 
 
   /*** Springboard's answer ***
